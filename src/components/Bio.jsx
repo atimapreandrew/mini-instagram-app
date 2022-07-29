@@ -1,28 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import profileIcon from "../assets/profileIcon.svg";
 import getPhotoUrl from "get-photo-url";
+import { db } from "../dexie";
 
 function Bio() {
   const [userDetails, setUserDetails] = useState({
-    name: "Andrew Atimapre",
-    about: "I'm a software developer.",
+    name: "John Doe",
+    about: "Here should be a brief description about you :).",
   });
   const [editFormIsOpen, setEditFormIsOpen] = useState(false);
   const [profilePhoto, setProfilePhoto] = useState(profileIcon);
 
-  function updateUserDetails(e) {
-    e.preventDefault();
-    setUserDetails({
+  useEffect(() => {
+    const setDataFromDB = async () => {
+      const userDetailsFromDB = await db.bio.get("info");
+      const profilePhotoFromDB = await db.bio.get("profilePhoto");
+      userDetailsFromDB && setUserDetails(userDetailsFromDB);
+      profilePhotoFromDB && setProfilePhoto(profilePhotoFromDB);
+    };
+
+    setDataFromDB();
+  }, []);
+
+  async function updateUserDetails(e) {
+    const objectData = {
       name: e.target.name.value,
       about: e.target.about.value,
-    });
+    };
+    e.preventDefault();
+    setUserDetails(objectData);
+    await db.bio.put(objectData, "info");
     setEditFormIsOpen(false);
   }
 
   const editForm = (
     <form className="edit-bio-form" onSubmit={updateUserDetails}>
-      <input type="text" id="" name="name" placeholder="Your name" />
-      <input type="text" id="" name="about" placeholder="About you" />
+      <input
+        type="text"
+        id=""
+        name="name"
+        defaultValue={userDetails.name}
+        placeholder="Your name"
+      />
+      <input
+        type="text"
+        id=""
+        name="about"
+        defaultValue={userDetails.about}
+        placeholder="About you"
+      />
       <br />
       <button
         onClick={() => setEditFormIsOpen(false)}
@@ -48,6 +74,7 @@ function Bio() {
   const updateProfilePhoto = async () => {
     const newProfilePhoto = await getPhotoUrl("#profilePhotoInput");
     setProfilePhoto(newProfilePhoto);
+    await db.bio.put(newProfilePhoto, "profilePhoto");
   };
 
   return (

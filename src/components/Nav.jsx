@@ -7,7 +7,7 @@ function Nav() {
       <button className="logo">
         <img src={Logo} alt="Logo" />
       </button>
-      <input className="search" type="text" placeholder="search" />
+      <input className="search" type="text" placeholder="Search" />
       <span className="nav-links">
         <button>
           <i className="fas fa-home" />
