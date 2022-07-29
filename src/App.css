@@ -47,8 +47,9 @@ body {
   }
   
   .nav-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+    column-gap: 3em;
   }
   
   .nav-links i {
@@ -64,9 +65,9 @@ body {
     display: grid;
     grid-template-columns: 1fr 2fr;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 3em 0 2em 5em;
+    padding: 3em 0 2em 0;
     border-bottom: 0.2px solid #dbdbdb;
-    margin-top: 5em;
+    margin-top: 3em;
     margin-bottom: 2em;
   }
   
@@ -83,21 +84,20 @@ body {
   }
   
   @media screen and (max-width: 600px) {
+
+    .bio {
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    }
+    
     .profile-photo {
-      width: 5em;
-      height: 5em;
-      margin-top: 3em;
+      width: 10em;
+      height: 10em;
+      margin-top: 2em;
       margin-right: 2em;
     }
 
     .search {
       display: none;
-    }
-
-    .nav-links {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      gap: 54px;
     }
   }
   
@@ -137,7 +137,7 @@ body {
   }
   
   .edit-bio-form input {
-    width: 50%;
+    width: 70%;
     height: 2em;
     border: 0.1em solid #dbdbdb;
     border-radius: 0.2em;
@@ -152,7 +152,20 @@ body {
   .edit-bio-form .cancel-button {
     background-color: #890000;
   }
-  
+
+  .profile-info .delete-all-button {
+    background-color: #890000;
+    color: #fff;
+    font-size: 1.1em;
+    width: 10em;
+    height: 2em;
+    margin-left: 20px;
+  }
+
+  .profile-info .delete-all-button:hover {
+    background-color: #a10000;
+  }
+
   #addPhotoInput {
     display: none;
   }
@@ -160,16 +173,16 @@ body {
   .add-photo-button {
     transform: scale(3);
     position: fixed;
-    bottom: 5em;
-    right: 7em;
+    bottom: 3em;
+    right: 4em;
     cursor: pointer;
   }
   
   .gallery {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     row-gap: 1.7em;
-    column-gap: 1em;
+    column-gap: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
   
   .item {
@@ -183,6 +196,31 @@ body {
     height: 100%;
     width: 100%;
     object-fit: cover;
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #383636;
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+  }
+  
+  .spinner-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
   }
   
   .item:hover .item-image {

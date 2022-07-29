@@ -2,6 +2,7 @@ import React from "react";
 import getPhotoUrl from "get-photo-url";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../dexie";
+import LoadingSpinner from "./Spinner";
 
 function Gallery() {
   const allPhotos = useLiveQuery(() => db.gallery.toArray(), []);
@@ -24,6 +25,7 @@ function Gallery() {
       </label>
 
       <section className="gallery">
+        {!allPhotos && <LoadingSpinner />}
         {allPhotos?.map((photo) => (
           <div className="item" key={photo.id}>
             <img src={photo.url} className="item-image" alt="" />

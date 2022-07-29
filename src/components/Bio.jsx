@@ -71,6 +71,11 @@ function Bio() {
     </button>
   );
 
+  const deleteAllPhotos = async () => {
+    await db.gallery.clear();
+    alert("Successfully deleted all photos");
+  };
+
   const updateProfilePhoto = async () => {
     const newProfilePhoto = await getPhotoUrl("#profilePhotoInput");
     setProfilePhoto(newProfilePhoto);
@@ -93,6 +98,11 @@ function Bio() {
         <p className="name">{userDetails.name}</p>
         <p className="about">{userDetails.about}</p>
         {editFormIsOpen ? editForm : editButton}
+        {!editFormIsOpen && (
+          <button className="delete-all-button" onClick={deleteAllPhotos}>
+            Delete All Photos
+          </button>
+        )}
       </div>
     </section>
   );
