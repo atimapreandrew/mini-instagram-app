@@ -2,6 +2,7 @@ body {
     background-color: #fafafa;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
   }
   
   button {
@@ -70,7 +71,7 @@ body {
     padding: 2em 0 2em 0;
     border-bottom: 0.2px solid #dbdbdb;
     margin-top: 3em;
-    margin-bottom: 2em;
+    margin-bottom: 3em;
   }
   
   #profilePhotoInput {
