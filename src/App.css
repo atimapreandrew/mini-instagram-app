@@ -177,7 +177,7 @@ body {
     transform: scale(3);
     position: fixed;
     bottom: 3em;
-    right: 4em;
+    right: 3em;
     cursor: pointer;
     color: #0081d6;
   }
