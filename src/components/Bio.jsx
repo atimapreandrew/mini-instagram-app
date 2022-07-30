@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import profileIcon from "../assets/profileIcon.svg";
 import getPhotoUrl from "get-photo-url";
+import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../dexie";
 
 function Bio() {
@@ -8,6 +9,9 @@ function Bio() {
     name: "John Doe",
     about: "Here should be a brief description about you :).",
   });
+
+  // const userDetails = useLiveQuery(db.bio.toArray());
+
   const [editFormIsOpen, setEditFormIsOpen] = useState(false);
   const [profilePhoto, setProfilePhoto] = useState(profileIcon);
 
@@ -73,7 +77,7 @@ function Bio() {
 
   const deleteAllPhotos = async () => {
     await db.gallery.clear();
-    alert("Successfully deleted all photos");
+    alert("Successfully deleted all photos.");
   };
 
   const updateProfilePhoto = async () => {
