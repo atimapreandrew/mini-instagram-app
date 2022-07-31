@@ -10,8 +10,6 @@ function Bio() {
     about: "Here should be a brief description about you :).",
   });
 
-  // const userDetails = useLiveQuery(db.bio.toArray());
-
   const [editFormIsOpen, setEditFormIsOpen] = useState(false);
   const [profilePhoto, setProfilePhoto] = useState(profileIcon);
 

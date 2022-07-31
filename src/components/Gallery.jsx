@@ -2,7 +2,7 @@ import React from "react";
 import getPhotoUrl from "get-photo-url";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../dexie";
-import LoadingSpinner from "./Spinner";
+import LoadingSpinner from "./LoadingSpinner";
 
 function Gallery() {
   const allPhotos = useLiveQuery(() => db.gallery.toArray(), []);

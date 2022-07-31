@@ -8,12 +8,12 @@
       "type": "image/svg+xml"
     },
     {
-      "src": "./src/assets/Logo.png",
+      "src": "../src/assets/Logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "./src/assets/Logo.png",
+      "src": "../src/assets/Logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }
