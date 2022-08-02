@@ -5,24 +5,21 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../dexie";
 
 function Bio() {
-  const [userDetails, setUserDetails] = useState({
-    name: "John Doe",
-    about: "Here should be a brief description about you :).",
-  });
+  const userDetails = useLiveQuery(() => db.bio.get("info"), []);
+  const userPhoto = useLiveQuery(() => db.bio.get("profilePhoto"), []);
 
   const [editFormIsOpen, setEditFormIsOpen] = useState(false);
-  const [profilePhoto, setProfilePhoto] = useState(profileIcon);
 
-  useEffect(() => {
-    const setDataFromDB = async () => {
-      const userDetailsFromDB = await db.bio.get("info");
-      const profilePhotoFromDB = await db.bio.get("profilePhoto");
-      userDetailsFromDB && setUserDetails(userDetailsFromDB);
-      profilePhotoFromDB && setProfilePhoto(profilePhotoFromDB);
+  async function addUserDetailsToDB() {
+    const data = {
+      name: "Andrew A.",
+      about: "Building the next big thing :)",
     };
-
-    setDataFromDB();
-  }, []);
+    await db.bio.add(data, "info").catch((err) => {
+      console.log("Default Bio data already exist!");
+    });
+  }
+  addUserDetailsToDB();
 
   async function updateUserDetails(e) {
     const objectData = {
@@ -30,7 +27,6 @@ function Bio() {
       about: e.target.about.value,
     };
     e.preventDefault();
-    setUserDetails(objectData);
     await db.bio.put(objectData, "info");
     setEditFormIsOpen(false);
   }
@@ -39,16 +35,14 @@ function Bio() {
     <form className="edit-bio-form" onSubmit={updateUserDetails}>
       <input
         type="text"
-        id=""
         name="name"
-        defaultValue={userDetails.name}
+        defaultValue={userDetails?.name}
         placeholder="Your name"
       />
       <input
         type="text"
-        id=""
         name="about"
-        defaultValue={userDetails.about}
+        defaultValue={userDetails?.about}
         placeholder="About you"
       />
       <br />
@@ -80,7 +74,6 @@ function Bio() {
 
   const updateProfilePhoto = async () => {
     const newProfilePhoto = await getPhotoUrl("#profilePhotoInput");
-    setProfilePhoto(newProfilePhoto);
     await db.bio.put(newProfilePhoto, "profilePhoto");
   };
 
@@ -93,12 +86,12 @@ function Bio() {
           className="profile-photo"
           title="Click to edit photo"
         >
-          <img src={profilePhoto} alt="Profile Photo" />
+          <img src={!userPhoto ? profileIcon : userPhoto} alt="Profile Photo" />
         </div>
       </label>
       <div className="profile-info">
-        <p className="name">{userDetails.name}</p>
-        <p className="about">{userDetails.about}</p>
+        <p className="name">{userDetails?.name}</p>
+        <p className="about">{userDetails?.about}</p>
         {editFormIsOpen ? editForm : editButton}
         {!editFormIsOpen && (
           <button className="delete-all-button" onClick={deleteAllPhotos}>

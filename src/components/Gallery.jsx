@@ -26,6 +26,9 @@ function Gallery() {
 
       <section className="gallery">
         {!allPhotos && <LoadingSpinner />}
+        {allPhotos?.length === 0 ? (
+          <p>Gallery is empty, add some photos...</p>
+        ) : null}
         {allPhotos?.map((photo) => (
           <div className="item" key={photo.id}>
             <img src={photo.url} className="item-image" alt="" />
