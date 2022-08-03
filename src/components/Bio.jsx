@@ -22,12 +22,12 @@ function Bio() {
   addUserDetailsToDB();
 
   async function updateUserDetails(e) {
-    const objectData = {
+    const userData = {
       name: e.target.name.value,
       about: e.target.about.value,
     };
     e.preventDefault();
-    await db.bio.put(objectData, "info");
+    await db.bio.put(userData, "info");
     setEditFormIsOpen(false);
   }
 
