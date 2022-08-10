@@ -53,7 +53,7 @@
   .modalActions {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     margin-bottom: 10px;
     width: 100%;
   }
@@ -66,15 +66,15 @@
     border: none;
     font-size: 18px;
     color: #2c3e50;
-    background: white;
+    background: rgb(230, 230, 230);
     transition: all 0.25s ease;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.06);
     position: absolute;
     right: 0;
     top: 0;
     align-self: flex-end;
-    margin-top: -7px;
-    margin-right: -7px;
+    margin-top: 7px;
+    margin-right: 7px;
   }
   
   .deleteBtn {
@@ -92,7 +92,7 @@
   
   .deleteBtn:hover {
     transform: translateY(-2px);
-    background: #ff3e4e;
+    background: #a10000;
   }
   
   .cancelBtn {
@@ -103,12 +103,12 @@
     border-radius: 12px;
     font-size: 0.8rem;
     border: none;
-    color: #2c3e50;
-    background: #fcfcfc;
+    color: #fff;
+    background: #0095f6;
     transition: all 0.25s ease;
   }
   
   .cancelBtn:hover {
     transform: translateY(-2px);
-    background: whitesmoke;
+    background: #0081d6;
   }

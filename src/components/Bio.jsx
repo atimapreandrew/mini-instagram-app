@@ -3,12 +3,14 @@ import profileIcon from "../assets/profileIcon.svg";
 import getPhotoUrl from "get-photo-url";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../dexie";
+import Modal from "./modal/Modal";
 
 function Bio() {
   const userDetails = useLiveQuery(() => db.bio.get("info"), []);
   const userPhoto = useLiveQuery(() => db.bio.get("profilePhoto"), []);
 
   const [editFormIsOpen, setEditFormIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   async function addUserDetailsToDB() {
     const data = {
@@ -53,12 +55,15 @@ function Bio() {
       >
         Cancel
       </button>
-      <button type="submit">Save</button>
+      <button className="btn" type="submit">
+        Save
+      </button>
     </form>
   );
 
   const editButton = (
     <button
+      className="btn"
       onClick={() => {
         setEditFormIsOpen(true);
       }}
@@ -69,7 +74,7 @@ function Bio() {
 
   const deleteAllPhotos = async () => {
     await db.gallery.clear();
-    alert("Successfully deleted all photos.");
+    setIsOpen(false);
   };
 
   const updateProfilePhoto = async () => {
@@ -94,11 +99,14 @@ function Bio() {
         <p className="about">{userDetails?.about}</p>
         {editFormIsOpen ? editForm : editButton}
         {!editFormIsOpen && (
-          <button className="delete-all-button" onClick={deleteAllPhotos}>
+          <button className="delete-all-button" onClick={() => setIsOpen(true)}>
             Delete All Photos
           </button>
         )}
       </div>
+      {isOpen && (
+        <Modal setIsOpen={setIsOpen} id="bio" deleteBtn={deleteAllPhotos} />
+      )}
     </section>
   );
 }
