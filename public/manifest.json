@@ -1,0 +1,20 @@
+{
+  "short_name": "Mini Instagram App",
+  "name": "Mini Instagram App",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "48x48",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "./logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "theme_color": "#fafafa",
+  "background_color": "#fafafa"
+}
