@@ -27,11 +27,17 @@ function Gallery() {
         <i className="add-photo-button fas fa-plus-square"></i>
       </label>
 
-      <section className="gallery">
+      <section className="gallery-empty">
         {!allPhotos && <LoadingSpinner />}
         {allPhotos?.length === 0 ? (
-          <p>Gallery is empty, add some photos...</p>
+          <p>
+            Gallery is empty, click the <span className="addIcon">+</span> to
+            add some photos.
+          </p>
         ) : null}
+      </section>
+
+      <section className="gallery">
         {allPhotos?.map((photo) => (
           <div className="item" key={photo.id}>
             <img src={photo.url} className="item-image" alt="" />
