@@ -27,7 +27,7 @@ export default defineConfig({
         globPatterns: ["**/*.{js,jsx,json,css,html,ico,png,svg}"],
         runtimeCaching: [
           getCache({
-            pattern: /^https:\/\/kit.fontawesome.com\/23a2825686.js/,
+            pattern: /^https:\/\/kit\.fontawesome\.com\/23a2825686\.js/,
             name: "font-awesome",
           }),
         ],
